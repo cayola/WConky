@@ -417,23 +417,48 @@ namespace WConky
         {
             try
             {
-                var url = "https://api.open-meteo.com/v1/forecast" +
-                          "?latitude=-17.4&longitude=-63.8333&current_weather=true";
+                // Obtener ubicación automáticamente via IP
+                var (lat, lon, city) = await GetLocationAsync();
+
+                var url = $"https://api.open-meteo.com/v1/forecast" +
+                          $"?latitude={lat}&longitude={lon}&current_weather=true";
+
                 var json = await _http.GetStringAsync(url);
                 var doc = JsonDocument.Parse(json);
                 var curr = doc.RootElement.GetProperty("current_weather");
+
                 double temp = curr.GetProperty("temperature").GetDouble();
                 int code = curr.GetProperty("weathercode").GetInt32();
+
                 Dispatcher.Invoke(() =>
                 {
                     WeatherIcon.Text = GetWeatherIcon(code);
-                    WeatherTemp.Text = $"{temp:F0}°C";
+                    WeatherTemp.Text = $"{temp:F0}°C  {city}";
                     WeatherDesc.Text = GetWeatherDesc(code);
                 });
             }
             catch (Exception ex)
             {
                 Dispatcher.Invoke(() => WeatherDesc.Text = ex.Message);
+            }
+        }
+
+        async Task<(double Lat, double Lon, string City)> GetLocationAsync()
+        {
+            try
+            {
+                // ip-api.com — gratis, sin API key, hasta 45 req/min
+                var json = await _http.GetStringAsync("http://ip-api.com/json/?fields=lat,lon,city");
+                var doc = JsonDocument.Parse(json);
+                double lat = doc.RootElement.GetProperty("lat").GetDouble();
+                double lon = doc.RootElement.GetProperty("lon").GetDouble();
+                string city = doc.RootElement.GetProperty("city").GetString() ?? "";
+                return (lat, lon, city);
+            }
+            catch
+            {
+                // Si falla, usar Santa Cruz como fallback
+                return (-17.4, -63.8333, "Santa Cruz");
             }
         }
 
