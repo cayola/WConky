@@ -1,0 +1,123 @@
+﻿<Window x:Class="WConky.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WConky"
+        Width="300"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="False"
+        ShowInTaskbar="False"
+        SizeToContent="Height">
+
+	<Border Margin="10" CornerRadius="14"
+            Background="#18000000"
+            BorderBrush="#33FFFFFF"
+            BorderThickness="0.5"
+            Padding="20">
+		<StackPanel>
+
+			<Grid Margin="0,0,0,8">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">
+					<TextBlock x:Name="DateText"
+                               FontSize="11" Foreground="#99FFFFFF"
+                               FontFamily="Segoe UI Light"/>
+					<TextBlock x:Name="WeatherIcon" FontSize="28"/>
+					<TextBlock x:Name="WeatherTemp"
+                               FontSize="18" FontWeight="Medium"
+                               Foreground="White"/>
+					<TextBlock x:Name="WeatherDesc"
+                               FontSize="10" Foreground="#99FFFFFF"/>
+				</StackPanel>
+				<TextBlock x:Name="ClockText" Grid.Column="1"
+                           FontSize="64" FontWeight="Thin"
+                           Foreground="White" TextAlignment="Right"
+                           FontFamily="Segoe UI Light"
+                           VerticalAlignment="Center"/>
+			</Grid>
+
+			<Separator Background="#22FFFFFF" Margin="0,0,0,16"/>
+
+			<Grid Margin="0,0,0,16">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Column="0" HorizontalAlignment="Center">
+					<Canvas Width="72" Height="72">
+						<Ellipse Width="72" Height="72" Stroke="#22FFFFFF" StrokeThickness="7"/>
+						<Path x:Name="CpuArc" Stroke="#60A5FA" StrokeThickness="7"/>
+						<TextBlock x:Name="CpuPct"
+                                   Canvas.Left="0" Canvas.Top="26"
+                                   Width="72" TextAlignment="Center"
+                                   FontSize="14" FontWeight="Medium" Foreground="White"/>
+					</Canvas>
+					<TextBlock Text="CPU" FontSize="11" Foreground="#88FFFFFF"
+                               HorizontalAlignment="Center" Margin="0,6,0,0"/>
+					<TextBlock x:Name="CpuTemp" FontSize="12" Foreground="#60A5FA"
+                               FontWeight="Medium" HorizontalAlignment="Center"/>
+				</StackPanel>
+
+				<StackPanel Grid.Column="1" HorizontalAlignment="Center">
+					<Canvas Width="72" Height="72">
+						<Ellipse Width="72" Height="72" Stroke="#22FFFFFF" StrokeThickness="7"/>
+						<Path x:Name="RamArc" Stroke="#A78BFA" StrokeThickness="7"/>
+						<TextBlock x:Name="RamPct"
+                                   Canvas.Left="0" Canvas.Top="26"
+                                   Width="72" TextAlignment="Center"
+                                   FontSize="14" FontWeight="Medium" Foreground="White"/>
+					</Canvas>
+					<TextBlock Text="RAM" FontSize="11" Foreground="#88FFFFFF"
+                               HorizontalAlignment="Center" Margin="0,6,0,0"/>
+					<TextBlock x:Name="RamVal" FontSize="12" Foreground="#A78BFA"
+                               FontWeight="Medium" HorizontalAlignment="Center"/>
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" HorizontalAlignment="Center">
+					<Canvas Width="72" Height="72">
+						<Ellipse Width="72" Height="72" Stroke="#22FFFFFF" StrokeThickness="7"/>
+						<Path x:Name="DiskArc" Stroke="#34D399" StrokeThickness="7"/>
+						<TextBlock x:Name="DiskPct"
+                                   Canvas.Left="0" Canvas.Top="26"
+                                   Width="72" TextAlignment="Center"
+                                   FontSize="14" FontWeight="Medium" Foreground="White"/>
+					</Canvas>
+					<TextBlock Text="DISCO" FontSize="11" Foreground="#88FFFFFF"
+                               HorizontalAlignment="Center" Margin="0,6,0,0"/>
+					<TextBlock x:Name="DiskVal" FontSize="12" Foreground="#34D399"
+                               FontWeight="Medium" HorizontalAlignment="Center"/>
+				</StackPanel>
+			</Grid>
+
+			<Separator Background="#22FFFFFF" Margin="0,0,0,12"/>
+
+			<StackPanel x:Name="ServicesPanel" Margin="0,0,0,12"/>
+
+			<Separator Background="#22FFFFFF" Margin="0,0,0,12"/>
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<StackPanel Grid.Column="0">
+					<TextBlock Text="↑ Upload" FontSize="12" Foreground="#88FFFFFF"/>
+					<TextBlock x:Name="NetUp" FontSize="12"
+                               Foreground="White" FontWeight="Medium"/>
+				</StackPanel>
+				<StackPanel Grid.Column="1" HorizontalAlignment="Right">
+					<TextBlock Text="↓ Download" FontSize="12" Foreground="#88FFFFFF"/>
+					<TextBlock x:Name="NetDown" FontSize="12"
+                               Foreground="White" FontWeight="Medium"/>
+				</StackPanel>
+			</Grid>
+
+		</StackPanel>
+	</Border>
+</Window>
